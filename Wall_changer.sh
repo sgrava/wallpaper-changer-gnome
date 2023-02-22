@@ -1,4 +1,8 @@
 #!/bin/bash
+#simple bash script to 
+#	1. download the image of the day from Bing.
+#	2. set it as wallpaper in GNOME.
+#	3. open a dialog to ask if the user like the wallpaper, otherwise fall to a random one in the folder.
 
 #sleep some time
 sleep 1s
@@ -22,14 +26,7 @@ day="&idx=0"
 #May change this script later to get more images and rotate between them
 number="&n=1"
 
-#Set market, other options are:
-#"&mkt=zh-CN"
-#"&mkt=ja-JP"
-#"&mkt=en-AU"
-#"&mkt=en-UK"
-#"&mkt=de-DE"
-#"&mkt=en-NZ"
-#"&mkt=en-CA"
+#Set market, other options are:zh-CN,ja-JP,en-AU,en-UK,de-DE,en-NZ,en-CA
 market="&mkt=es"
 
 xmlURL=$bing"/HPImageArchive.aspx?format=xml"$day$number$market
