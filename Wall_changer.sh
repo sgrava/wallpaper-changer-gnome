@@ -13,10 +13,17 @@ if which wget > /dev/null;
  else echo "wget Not Installed"
  exit
 fi
+if which yad > /dev/null;
+ then echo "yad Installed"
+ else echo "yad Not Installed"
+ exit
+fi
+
+#create directory in the user home folder for images if it doesn't exist
+directory=~/.wallpapers_bing/
+[[ -d $directory ]] || mkdir $directory
 
 #-------------Set some variables
-#directory=/home/stefano/Apps/Scripts/Wallpapers_Bing/
-directory=$PWD/Wallpapers_Bing/
 #Base Bing URL
 bing="www.bing.com"
 #What day to start from. 0 is the current day,1 the previous day, etc...
@@ -62,15 +69,19 @@ gsettings set org.gnome.desktop.screensaver picture-uri file://$directory$pic_na
 
 
 #-------------------Do you like the Wallpaper?
+#move to the wallpaper folder
+cd $directory
+
 while ! GDK_BACKEND=x11 yad --image "dialog-question" --center --text-align=center --width=300 --height=100	--title "Alert" --text "Do you like the Wallpaper?"	--button=gtk-yes:0  --button=gtk-no:1
 do
-	cd $directory
-	#random pic
-	pic_name_loc=`ls | shuf -n 1`	
-	# Set wallpaper
-	gsettings set org.gnome.desktop.background picture-uri file://$directory$pic_name_loc	
-	rm ./$pic_name
-	pic_name=$pic_name_loc		
+	#if no remove picture
+	rm $pic_name
+	#choose a random pic
+	pic_name=`ls | shuf -n 1`
+	echo $pic_name
+	# Set as wallpaper and screensaver
+	gsettings set org.gnome.desktop.background picture-uri file://$directory$pic_name	
+	gsettings set org.gnome.desktop.screensaver picture-uri file://$directory$pic_name
 done
 
 exit
