@@ -30,7 +30,6 @@ bing="www.bing.com"
 day="&idx=0"
 
 #Number of images to get
-#May change this script later to get more images and rotate between them
 number="&n=1"
 
 #Set market, other options are:zh-CN,ja-JP,en-AU,en-UK,de-DE,en-NZ,en-CA
